@@ -20,11 +20,30 @@
     body {
       height: 100vh;
       background: linear-gradient(135deg, #000000, #8b0000);
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
       animation: fadeIn 1s ease-in-out;
+      transition: background 0.4s, color 0.4s;
+    }
+
+    body.light-mode {
+      background: linear-gradient(135deg, #ffffff, #e0e0e0);
+      color: black;
+    }
+
+    #toggle-mode {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 22px;
+      background: transparent;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      z-index: 999;
     }
 
     .container {
@@ -35,9 +54,13 @@
       backdrop-filter: blur(25px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       padding: 40px;
-      color: white;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       text-align: center;
+    }
+
+    body.light-mode .container {
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     .profile-pic {
@@ -63,7 +86,6 @@
     p {
       font-size: 1.2em;
       line-height: 1.6;
-      color: #f0f0f0;
       margin-bottom: 25px;
     }
 
@@ -93,13 +115,11 @@
     h2 {
       font-size: 2em;
       margin: 30px 0 10px;
-      color: #ffffff;
     }
 
     ul {
       list-style: none;
       padding: 0;
-      color: #f0f0f0;
       font-size: 1.1em;
     }
 
@@ -119,37 +139,29 @@
   </style>
 </head>
 <body>
+  <button id="toggle-mode">🌙</button>
+
   <div class="container">
-
-    <!-- Profile Photo -->
     <img src="https://i.postimg.cc/zfykMWX1/1732294109483.jpg" alt="Selvakumaran M" class="profile-pic">
-
-    <!-- Name & Intro -->
     <h1>Selvakumaran M</h1>
     <p>Hello! I’m Selvakumaran M, a tech enthusiast building smart systems. Welcome to my personal website.</p>
 
-    <!-- Buttons with Icons -->
     <a href="mailto:selvakumaran134@gmail.com" class="button" target="_blank">
       <i class="fas fa-envelope"></i> 📧Gmail
     </a>
-
     <a href="https://www.facebook.com/share/1BtVZYgnYD/" class="button" target="_blank">
       <i class="fab fa-facebook-f"></i> 📘Facebook
     </a>
-
     <a href="https://www.instagram.com/selvakumaran_134" class="button" target="_blank">
       <i class="fab fa-instagram"></i> 📸Instagram
     </a>
-
     <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" class="button" target="_blank">
       <i class="fab fa-linkedin-in"></i> 🔗LinkedIn
     </a>
-
     <a href="resume.pdf" class="button" target="_blank">
       <i class="fas fa-file-download"></i> 📄Resume
     </a>
 
-    <!-- Skills -->
     <h2>🧠 My Skills</h2>
     <ul>
       <li>⚡ HTML, CSS, JavaScript</li>
@@ -158,14 +170,20 @@
       <li>📲 Mobile-first Web Design</li>
     </ul>
 
-    <!-- Projects -->
     <h2>💼 Projects</h2>
     <ul>
       <li>🔋 Smart Home Energy Monitoring System</li>
       <li>🌦️ IoT-based Weather and Battery Monitor</li>
       <li>🎬 YouTube Edits – Vlogs & Tech Tips</li>
     </ul>
-
   </div>
+
+  <script>
+    const toggleButton = document.getElementById('toggle-mode');
+    toggleButton.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      toggleButton.textContent = document.body.classList.contains('light-mode') ? '🌞' : '🌙';
+    });
+  </script>
 </body>
 </html>
