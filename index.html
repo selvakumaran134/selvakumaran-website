@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Selvakumaran M – Personal Website</title>
 
   <!-- Font & Icons -->
@@ -38,7 +38,13 @@
       object-fit: cover;
       z-index: -1;
       opacity: 0.8;
-      animation: zoomPan 20s ease-in-out infinite;
+      animation: zoomPan 25s ease-in-out infinite;
+    }
+
+    @keyframes zoomPan {
+      0%   { transform: scale(1)   translate(0, 0); }
+      50%  { transform: scale(1.1) translate(10px, 10px); }
+      100% { transform: scale(1)   translate(0, 0); }
     }
 
     nav {
@@ -57,10 +63,6 @@
       display: flex;
       list-style: none;
       gap: 20px;
-    }
-
-    nav ul li {
-      position: relative;
     }
 
     nav ul li a {
@@ -164,12 +166,6 @@
       to { opacity: 1; transform: scale(1); }
     }
 
-    @keyframes zoomPan {
-      0% { transform: scale(1) translate(0, 0); }
-      50% { transform: scale(1.1) translate(5px, 5px); }
-      100% { transform: scale(1) translate(0, 0); }
-    }
-
     @media (max-width: 768px) {
       .container {
         padding: 20px;
@@ -213,14 +209,11 @@
   </style>
 </head>
 <body>
-
-  <!-- Video Background -->
   <video autoplay muted loop id="bg-video">
-    <source src="background.mp4" type="video/mp4">
+    <source src="background.webm" type="video/webm">
     Your browser does not support the video tag.
   </video>
 
-  <!-- Navigation Menu -->
   <nav>
     <ul>
       <li><a href="#home">Home</a></li>
