@@ -20,11 +20,13 @@
     body {
       height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 20px;
+      justify-content: flex-start;
+      padding: 0;
       animation: fadeIn 1s ease-in-out;
       color: white;
+      overflow-x: hidden;
     }
 
     #bg-video {
@@ -36,9 +38,47 @@
       object-fit: cover;
       z-index: -1;
       opacity: 0.8;
+      animation: zoomPan 20s ease-in-out infinite;
+    }
+
+    nav {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 10px 20px;
+      transition: all 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      background: #ff0000;
+      border-radius: 20px;
+      transform: scale(1.1);
     }
 
     .container {
+      margin-top: 100px;
       max-width: 800px;
       width: 100%;
       background: rgba(0, 0, 0, 0.6);
@@ -123,6 +163,53 @@
       from { opacity: 0; transform: scale(0.8); }
       to { opacity: 1; transform: scale(1); }
     }
+
+    @keyframes zoomPan {
+      0% { transform: scale(1) translate(0, 0); }
+      50% { transform: scale(1.1) translate(5px, 5px); }
+      100% { transform: scale(1) translate(0, 0); }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+        margin-top: 80px;
+      }
+
+      .profile-pic {
+        width: 100px;
+        height: 100px;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      p {
+        font-size: 1em;
+      }
+
+      .button {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        font-size: 1em;
+      }
+
+      ul {
+        font-size: 1em;
+        text-align: left;
+      }
+
+      h2 {
+        font-size: 1.5em;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -133,7 +220,19 @@
     Your browser does not support the video tag.
   </video>
 
-  <div class="container">
+  <!-- Navigation Menu -->
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="container" id="home">
     <img src="https://i.postimg.cc/zfykMWX1/1732294109483.jpg" alt="Selvakumaran M" class="profile-pic">
     <h1>Selvakumaran M</h1>
     <p>Hello! I’m Selvakumaran M, a tech enthusiast building smart systems. Welcome to my personal website.</p>
@@ -154,7 +253,7 @@
       <i class="fas fa-file-download"></i> 📄 Resume
     </a>
 
-    <h2>🧠 My Skills</h2>
+    <h2 id="skills">🧠 My Skills</h2>
     <ul>
       <li>⚡ HTML, CSS, JavaScript</li>
       <li>⚙️ ESP32 & IoT Projects</li>
@@ -162,12 +261,21 @@
       <li>📲 Mobile-first Web Design</li>
     </ul>
 
-    <h2>💼 Projects</h2>
+    <h2 id="projects">💼 Projects</h2>
     <ul>
       <li>🔋 Smart Home Energy Monitoring System</li>
       <li>🌦️ IoT-based Weather and Battery Monitor</li>
       <li>🎬 YouTube Edits – Vlogs & Tech Tips</li>
     </ul>
+
+    <h2 id="achievements">🏆 Achievements</h2>
+    <p>To be added soon...</p>
+
+    <h2 id="certifications">📜 Certifications</h2>
+    <p>To be added soon...</p>
+
+    <h2 id="contact">📞 Contact Me</h2>
+    <p>Email: selvakumaran134@gmail.com</p>
   </div>
 </body>
 </html>
