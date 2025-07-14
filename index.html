@@ -3,142 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Selvakumaran M – Personal Website</title>
+  <title>Selvakumaran M | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; font-family: 'Inter', sans-serif; }
 
-    body {
-      transition: 0.5s ease background, 0.5s ease color;
-    }
+    body { background: #000; color: white; transition: 0.5s background, 0.5s color; }
+    section { min-height: 100vh; padding: 80px 20px 20px; display: flex; align-items: center; justify-content: center; flex-direction: column; opacity: 0; transform: translateY(50px); transition: all 1s ease; }
 
-    video#bg-video {
+    section.visible { opacity: 1; transform: translateY(0); }
+
+    /* Header */
+    header {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: -1;
-      opacity: 0.6;
-    }
-
-    nav {
+      top: 0; left: 0;
       width: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 10px 0;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 10;
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background: rgba(0,0,0,0.4);
+      transition: background 0.3s;
+      z-index: 100;
     }
 
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
+    header.scrolled { background: rgba(0,0,0,0.9); }
 
-    nav ul li a {
+    nav a {
       color: white;
       text-decoration: none;
+      margin: 0 15px;
       font-weight: bold;
-      padding: 10px 20px;
-      transition: 0.3s ease;
     }
 
-    nav ul li a:hover {
-      background: #ff0000;
-      border-radius: 20px;
-    }
+    nav a:hover { color: #ff0000; }
 
     #theme-toggle {
-      margin-left: 10px;
-      background: #fff;
-      color: #000;
-      border-radius: 20px;
-      padding: 5px 15px;
+      background: white;
+      color: black;
       font-weight: bold;
+      padding: 5px 15px;
+      border-radius: 20px;
       cursor: pointer;
     }
 
-    .container {
-      margin-top: 120px;
-      max-width: 800px;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 20px;
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 40px 20px;
-      color: white;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
+    /* Hero */
     .profile-pic {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
+      object-fit: cover;
       border: 4px solid rgba(255,255,255,0.3);
-      box-shadow: 0 0 20px rgba(255,0,0,0.6);
+      box-shadow: 0 0 20px rgba(255,0,0,0.5);
       margin-bottom: 20px;
     }
 
-    .button {
+    .buttons a {
       display: inline-block;
-      margin: 10px 10px;
-      padding: 12px 24px;
       background: #ff0000;
       color: white;
-      font-weight: bold;
-      border: none;
+      padding: 10px 20px;
+      margin: 10px;
       border-radius: 30px;
-      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
       text-decoration: none;
-      transition: 0.3s ease;
-    }
-
-    .button:hover {
-      background: #cc0000;
-    }
-
-    .progress-container {
-      margin: 20px 0;
-      text-align: left;
-    }
-
-    .progress-label {
       font-weight: bold;
-      margin-bottom: 5px;
+      transition: background 0.3s;
     }
 
-    .progress-bar {
+    .buttons a:hover { background: #cc0000; }
+
+    /* Skills Progress Bars */
+    .skill {
+      width: 80%;
+      margin: 10px 0;
+    }
+
+    .skill-name { font-weight: bold; margin-bottom: 5px; }
+
+    .skill-bar {
       width: 100%;
-      background: #555;
-      border-radius: 20px;
+      height: 20px;
+      background: #444;
+      border-radius: 10px;
       overflow: hidden;
-      margin-bottom: 15px;
     }
 
-    .progress {
-      height: 20px;
+    .skill-fill {
+      height: 100%;
       background: #ff0000;
       width: 0;
       transition: width 2s ease;
+    }
+
+    /* Projects */
+    .project-card {
+      background: rgba(255,255,255,0.05);
+      padding: 15px;
+      margin: 10px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Form */
+    form {
+      width: 80%;
+      max-width: 500px;
     }
 
     input, textarea {
@@ -149,108 +122,150 @@
       border: none;
     }
 
-    body.light-theme {
-      background: #fff;
-      color: #000;
+    button.submit-btn {
+      width: 100%;
+      padding: 10px;
+      background: #ff0000;
+      border: none;
+      border-radius: 20px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
     }
 
-    body.light-theme .container {
-      background: rgba(255, 255, 255, 0.9);
-      color: #000;
+    /* Light Theme */
+    body.light { background: #fff; color: #000; }
+    body.light header { background: rgba(255,255,255,0.9); }
+    body.light nav a { color: #000; }
+    body.light nav a:hover { color: #ff0000; }
+    body.light .buttons a { background: #000; color: #fff; }
+    body.light .buttons a:hover { background: #333; }
+
+    video#bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100vw;
+      min-height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0.6;
+    }
+
+    @media(max-width: 768px) {
+      section { padding-top: 120px; }
     }
 
   </style>
 </head>
-<body class="dark-theme">
 
-  <!-- Background Video -->
+<body>
+
+  <!-- Optional Background Video -->
   <video autoplay muted loop id="bg-video">
     <source src="background.webm" type="video/webm">
-    Your browser does not support the video tag.
   </video>
 
-  <!-- Navigation Bar -->
-  <nav>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button id="theme-toggle">🌙 Dark Mode</button>
-  </nav>
+  <!-- Header -->
+  <header id="header">
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button id="theme-toggle">🌙</button>
+  </header>
 
-  <!-- Main Container -->
-  <div class="container" id="home">
+  <!-- Sections -->
+  <section id="home">
     <img src="https://i.postimg.cc/zfykMWX1/1732294109483.jpg" alt="Selvakumaran M" class="profile-pic">
     <h1>Selvakumaran M</h1>
-    <p>Hello! I’m Selvakumaran M, a tech enthusiast building smart systems. Welcome to my personal website.</p>
-
-    <a href="mailto:selvakumaran134@gmail.com" class="button" target="_blank">📧 Gmail</a>
-    <a href="https://www.facebook.com/share/1BtVZYgnYD/" class="button" target="_blank">📘 Facebook</a>
-    <a href="https://www.instagram.com/selvakumaran_134" class="button" target="_blank">📸 Instagram</a>
-    <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" class="button" target="_blank">🔗 LinkedIn</a>
-    <a href="resume.pdf" class="button" target="_blank">📄 View Resume</a>
-
-    <!-- Skills Progress Bars -->
-    <h2 id="skills">🛠 My Skills</h2>
-    <div class="progress-container">
-      <div class="progress-label">HTML & CSS</div>
-      <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
-
-      <div class="progress-label">JavaScript</div>
-      <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
-
-      <div class="progress-label">ESP32 / IoT</div>
-      <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
-
-      <div class="progress-label">Video Editing</div>
-      <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
+    <p>I’m passionate about IoT, Smart Energy Systems, and Creative Web Technologies.</p>
+    <div class="buttons">
+      <a href="mailto:selvakumaran134@gmail.com">📧 Gmail</a>
+      <a href="resume.pdf" target="_blank">📄 View Resume</a>
     </div>
+  </section>
 
-    <!-- Projects -->
-    <h2 id="projects">💼 Projects</h2>
-    <ul>
-      <li>🔋 Smart Home Energy Monitoring System</li>
-      <li>🌦️ IoT-based Weather and Battery Monitor</li>
-      <li>🎬 YouTube Edits – Vlogs & Tech Tips</li>
-    </ul>
+  <section id="skills">
+    <h2>🛠 My Skills</h2>
+    <div class="skill">
+      <div class="skill-name">HTML / CSS</div>
+      <div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">JavaScript</div>
+      <div class="skill-bar"><div class="skill-fill" data-width="70%"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">ESP32 / IoT</div>
+      <div class="skill-bar"><div class="skill-fill" data-width="80%"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">Video Editing</div>
+      <div class="skill-bar"><div class="skill-fill" data-width="75%"></div></div>
+    </div>
+  </section>
 
-    <!-- Contact Form -->
-    <h2 id="contact">📬 Contact Me</h2>
-    <form onsubmit="return submitForm()">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <input type="email" id="email" placeholder="Your Email" required>
-      <textarea id="message" rows="5" placeholder="Your Message..." required></textarea>
-      <button type="submit" class="button">Send Message</button>
+  <section id="projects">
+    <h2>💼 My Projects</h2>
+    <div class="project-card">
+      🔋 Smart Home Energy Monitoring System
+    </div>
+    <div class="project-card">
+      🌦️ IoT-based Weather and Battery Monitoring
+    </div>
+    <div class="project-card">
+      🎬 YouTube Edits – Vlogs & Tech Tips
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>📬 Contact Me</h2>
+    <form action="https://formsubmit.co/selvakumaran134@gmail.com" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+      <button type="submit" class="submit-btn">Send Message</button>
     </form>
+  </section>
 
-    <p id="form-response" style="margin-top:15px; font-weight:bold;"></p>
-
-  </div>
-
-  <!-- JavaScript -->
   <script>
-    const toggleButton = document.getElementById('theme-toggle');
-    const body = document.body;
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.onclick = () => {
+      document.body.classList.toggle('light');
+      themeToggle.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+    };
 
-    toggleButton.addEventListener('click', () => {
-      if (body.classList.contains('dark-theme')) {
-        body.classList.remove('dark-theme');
-        body.classList.add('light-theme');
-        toggleButton.textContent = '☀️ Light Mode';
-      } else {
-        body.classList.remove('light-theme');
-        body.classList.add('dark-theme');
-        toggleButton.textContent = '🌙 Dark Mode';
-      }
+    // Sticky Header
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // Contact Form (Dummy Response)
-    function submitForm() {
-      document.getElementById('form-response').innerText = "Thank you! I'll contact you soon.";
-      return false; // Prevent actual form submission
-    }
+    // Scroll Animations
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => { observer.observe(section); });
+
+    // Animate Skill Bars
+    const skillFills = document.querySelectorAll('.skill-fill');
+    const skillsSection = document.getElementById('skills');
+    const skillObserver = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        skillFills.forEach(bar => { bar.style.width = bar.dataset.width; });
+      }
+    }, { threshold: 0.5 });
+
+    skillObserver.observe(skillsSection);
+
   </script>
 
 </body>
