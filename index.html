@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Selvakumaran M – Personal Website</title>
-
-  <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
   <style>
     * {
@@ -17,10 +16,10 @@
     }
 
     body {
-      overflow-x: hidden;
+      transition: 0.5s ease background, 0.5s ease color;
     }
 
-    #bg-video {
+    video#bg-video {
       position: fixed;
       top: 0;
       left: 0;
@@ -28,7 +27,7 @@
       height: 100vh;
       object-fit: cover;
       z-index: -1;
-      opacity: 0.7;
+      opacity: 0.6;
     }
 
     nav {
@@ -41,12 +40,14 @@
       z-index: 10;
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     nav ul {
       display: flex;
       list-style: none;
       gap: 20px;
+      flex-wrap: wrap;
     }
 
     nav ul li a {
@@ -54,25 +55,34 @@
       text-decoration: none;
       font-weight: bold;
       padding: 10px 20px;
-      transition: all 0.3s ease;
+      transition: 0.3s ease;
     }
 
     nav ul li a:hover {
       background: #ff0000;
       border-radius: 20px;
-      transform: scale(1.1);
+    }
+
+    #theme-toggle {
+      margin-left: 10px;
+      background: #fff;
+      color: #000;
+      border-radius: 20px;
+      padding: 5px 15px;
+      font-weight: bold;
+      cursor: pointer;
     }
 
     .container {
-      margin-top: 100px;
+      margin-top: 120px;
       max-width: 800px;
-      width: 100%;
       background: rgba(0, 0, 0, 0.6);
       border-radius: 20px;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 40px;
+      padding: 40px 20px;
       color: white;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       text-align: center;
       margin-left: auto;
       margin-right: auto;
@@ -86,15 +96,6 @@
       border: 4px solid rgba(255,255,255,0.3);
       box-shadow: 0 0 20px rgba(255,0,0,0.6);
       margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: 3em;
-      font-weight: 600;
-      margin-bottom: 15px;
-      background: linear-gradient(to right, #ff4e50, #f9d423);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
     }
 
     .button {
@@ -115,46 +116,52 @@
       background: #cc0000;
     }
 
-    h2 {
-      font-size: 2em;
-      margin: 30px 0 10px;
+    .progress-container {
+      margin: 20px 0;
+      text-align: left;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      font-size: 1.1em;
+    .progress-label {
+      font-weight: bold;
+      margin-bottom: 5px;
     }
 
-    ul li {
-      margin-bottom: 8px;
+    .progress-bar {
+      width: 100%;
+      background: #555;
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 15px;
     }
 
-    @media (max-width: 768px) {
-      .container {
-        padding: 20px;
-        margin-top: 80px;
-      }
-
-      .profile-pic {
-        width: 100px;
-        height: 100px;
-      }
-
-      h1 {
-        font-size: 2em;
-      }
-
-      .button {
-        display: block;
-        width: 100%;
-        margin: 10px 0;
-        font-size: 1em;
-      }
+    .progress {
+      height: 20px;
+      background: #ff0000;
+      width: 0;
+      transition: width 2s ease;
     }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: none;
+    }
+
+    body.light-theme {
+      background: #fff;
+      color: #000;
+    }
+
+    body.light-theme .container {
+      background: rgba(255, 255, 255, 0.9);
+      color: #000;
+    }
+
   </style>
 </head>
-<body>
+<body class="dark-theme">
 
   <!-- Background Video -->
   <video autoplay muted loop id="bg-video">
@@ -162,19 +169,18 @@
     Your browser does not support the video tag.
   </video>
 
-  <!-- Navigation Menu -->
+  <!-- Navigation Bar -->
   <nav>
     <ul>
       <li><a href="#home">Home</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#achievements">Achievements</a></li>
-      <li><a href="#certifications">Certifications</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button id="theme-toggle">🌙 Dark Mode</button>
   </nav>
 
-  <!-- Website Content -->
+  <!-- Main Container -->
   <div class="container" id="home">
     <img src="https://i.postimg.cc/zfykMWX1/1732294109483.jpg" alt="Selvakumaran M" class="profile-pic">
     <h1>Selvakumaran M</h1>
@@ -186,14 +192,23 @@
     <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" class="button" target="_blank">🔗 LinkedIn</a>
     <a href="resume.pdf" class="button" target="_blank">📄 View Resume</a>
 
-    <h2 id="skills">🧠 My Skills</h2>
-    <ul>
-      <li>⚡ HTML, CSS, JavaScript</li>
-      <li>⚙️ ESP32 & IoT Projects</li>
-      <li>🛠️ Video Editing (YouTube)</li>
-      <li>📲 Mobile-first Web Design</li>
-    </ul>
+    <!-- Skills Progress Bars -->
+    <h2 id="skills">🛠 My Skills</h2>
+    <div class="progress-container">
+      <div class="progress-label">HTML & CSS</div>
+      <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
 
+      <div class="progress-label">JavaScript</div>
+      <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
+
+      <div class="progress-label">ESP32 / IoT</div>
+      <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+
+      <div class="progress-label">Video Editing</div>
+      <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
+    </div>
+
+    <!-- Projects -->
     <h2 id="projects">💼 Projects</h2>
     <ul>
       <li>🔋 Smart Home Energy Monitoring System</li>
@@ -201,15 +216,42 @@
       <li>🎬 YouTube Edits – Vlogs & Tech Tips</li>
     </ul>
 
-    <h2 id="achievements">🏆 Achievements</h2>
-    <p>To be added soon...</p>
+    <!-- Contact Form -->
+    <h2 id="contact">📬 Contact Me</h2>
+    <form onsubmit="return submitForm()">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" rows="5" placeholder="Your Message..." required></textarea>
+      <button type="submit" class="button">Send Message</button>
+    </form>
 
-    <h2 id="certifications">📜 Certifications</h2>
-    <p>To be added soon...</p>
+    <p id="form-response" style="margin-top:15px; font-weight:bold;"></p>
 
-    <h2 id="contact">📞 Contact Me</h2>
-    <p>Email: selvakumaran134@gmail.com</p>
   </div>
+
+  <!-- JavaScript -->
+  <script>
+    const toggleButton = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    toggleButton.addEventListener('click', () => {
+      if (body.classList.contains('dark-theme')) {
+        body.classList.remove('dark-theme');
+        body.classList.add('light-theme');
+        toggleButton.textContent = '☀️ Light Mode';
+      } else {
+        body.classList.remove('light-theme');
+        body.classList.add('dark-theme');
+        toggleButton.textContent = '🌙 Dark Mode';
+      }
+    });
+
+    // Contact Form (Dummy Response)
+    function submitForm() {
+      document.getElementById('form-response').innerText = "Thank you! I'll contact you soon.";
+      return false; // Prevent actual form submission
+    }
+  </script>
 
 </body>
 </html>
