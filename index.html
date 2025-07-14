@@ -1,152 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Selvakumaran M – Personal Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Selvakumaran M – Dashboard Style Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
+    * {margin: 0; padding: 0; box-sizing: border-box;}
     body {
-      transition: 0.5s ease background, 0.5s ease color;
-    }
-
-    video#bg-video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: -1;
-      opacity: 0.6;
-    }
-
-    nav {
-      width: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 10px 0;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 10;
+      font-family: 'Inter', sans-serif;
+      background: #000;
+      color: white;
       display: flex;
       justify-content: center;
-      flex-wrap: wrap;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      text-align: center;
     }
 
-    nav ul {
-      display: flex;
-      list-style: none;
+    h1 {
+      margin: 20px 0;
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 20px;
-      flex-wrap: wrap;
+      width: 90%;
+      max-width: 800px;
+      margin: 20px auto;
     }
 
-    nav ul li a {
+    .card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 30px 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    .card:hover {
+      background: rgba(255,0,0,0.6);
+      transform: scale(1.05);
+    }
+
+    /* Popup */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .popup-content {
+      background: rgba(255,255,255,0.1);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 500px;
       color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 10px 20px;
-      transition: 0.3s ease;
     }
 
-    nav ul li a:hover {
+    .popup button {
+      margin-top: 20px;
       background: #ff0000;
-      border-radius: 20px;
-    }
-
-    #theme-toggle {
-      margin-left: 10px;
-      background: #fff;
-      color: #000;
-      border-radius: 20px;
-      padding: 5px 15px;
+      border: none;
+      color: white;
+      padding: 10px 20px;
       font-weight: bold;
+      border-radius: 15px;
       cursor: pointer;
     }
 
-    .container {
-      margin-top: 120px;
-      max-width: 800px;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 20px;
-      backdrop-filter: blur(15px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 40px 20px;
-      color: white;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      text-align: center;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .profile-pic {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid rgba(255,255,255,0.3);
-      box-shadow: 0 0 20px rgba(255,0,0,0.6);
-      margin-bottom: 20px;
-    }
-
-    .button {
-      display: inline-block;
-      margin: 10px 10px;
-      padding: 12px 24px;
-      background: #ff0000;
-      color: white;
+    #theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      color: black;
       font-weight: bold;
-      border: none;
-      border-radius: 30px;
-      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
-      text-decoration: none;
-      transition: 0.3s ease;
-    }
-
-    .button:hover {
-      background: #cc0000;
-    }
-
-    .progress-container {
-      margin: 20px 0;
-      text-align: left;
-    }
-
-    .progress-label {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .progress-bar {
-      width: 100%;
-      background: #555;
+      padding: 5px 15px;
       border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 15px;
-    }
-
-    .progress {
-      height: 20px;
-      background: #ff0000;
-      width: 0;
-      transition: width 2s ease;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: none;
+      cursor: pointer;
     }
 
     body.light-theme {
@@ -154,103 +99,76 @@
       color: #000;
     }
 
-    body.light-theme .container {
-      background: rgba(255, 255, 255, 0.9);
+    body.light-theme .card {
+      background: rgba(0,0,0,0.05);
       color: #000;
+    }
+
+    body.light-theme .card:hover {
+      background: #ffcccc;
     }
 
   </style>
 </head>
-<body class="dark-theme">
+<body>
 
-  <!-- Background Video -->
-  <video autoplay muted loop id="bg-video">
-    <source src="background.webm" type="video/webm">
-    Your browser does not support the video tag.
-  </video>
+  <!-- Dark/Light Mode Button -->
+  <button id="theme-toggle">🌙</button>
 
-  <!-- Navigation Bar -->
-  <nav>
-    <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button id="theme-toggle">🌙 Dark Mode</button>
-  </nav>
+  <!-- Profile Header -->
+  <img src="https://i.postimg.cc/zfykMWX1/1732294109483.jpg" alt="Selvakumaran" style="width:80px;height:80px;border-radius:50%;margin-top:60px;">
+  <h1>Selvakumaran M</h1>
+  <p>Welcome to My Personal Portfolio</p>
 
-  <!-- Main Container -->
-  <div class="container" id="home">
-    <img src="https://i.postimg.cc/zfykMWX1/1732294109483.jpg" alt="Selvakumaran M" class="profile-pic">
-    <h1>Selvakumaran M</h1>
-    <p>Hello! I’m Selvakumaran M, a tech enthusiast building smart systems. Welcome to my personal website.</p>
-
-    <a href="mailto:selvakumaran134@gmail.com" class="button" target="_blank">📧 Gmail</a>
-    <a href="https://www.facebook.com/share/1BtVZYgnYD/" class="button" target="_blank">📘 Facebook</a>
-    <a href="https://www.instagram.com/selvakumaran_134" class="button" target="_blank">📸 Instagram</a>
-    <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" class="button" target="_blank">🔗 LinkedIn</a>
-    <a href="resume.pdf" class="button" target="_blank">📄 View Resume</a>
-
-    <!-- Skills Progress Bars -->
-    <h2 id="skills">🛠 My Skills</h2>
-    <div class="progress-container">
-      <div class="progress-label">HTML & CSS</div>
-      <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
-
-      <div class="progress-label">JavaScript</div>
-      <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
-
-      <div class="progress-label">ESP32 / IoT</div>
-      <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
-
-      <div class="progress-label">Video Editing</div>
-      <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
+  <!-- Dashboard Cards -->
+  <div class="card-container">
+    <div class="card" onclick="openPopup('Home', 'Hi! I am Selvakumaran M, a tech enthusiast passionate about IoT systems, smart devices, and web technologies.')">
+      🏠 Home
     </div>
 
-    <!-- Projects -->
-    <h2 id="projects">💼 Projects</h2>
-    <ul>
-      <li>🔋 Smart Home Energy Monitoring System</li>
-      <li>🌦️ IoT-based Weather and Battery Monitor</li>
-      <li>🎬 YouTube Edits – Vlogs & Tech Tips</li>
-    </ul>
+    <div class="card" onclick="openPopup('Skills', 'HTML, CSS, JavaScript, IoT with ESP32, Video Editing, Responsive Web Design.')">
+      🛠️ Skills
+    </div>
 
-    <!-- Contact Form -->
-    <h2 id="contact">📬 Contact Me</h2>
-    <form onsubmit="return submitForm()">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <input type="email" id="email" placeholder="Your Email" required>
-      <textarea id="message" rows="5" placeholder="Your Message..." required></textarea>
-      <button type="submit" class="button">Send Message</button>
-    </form>
+    <div class="card" onclick="openPopup('Projects', '1. Smart Home Energy Monitoring\n2. IoT Weather & Battery Monitoring\n3. YouTube Vlogs & Tech Videos.')">
+      📁 Projects
+    </div>
 
-    <p id="form-response" style="margin-top:15px; font-weight:bold;"></p>
-
+    <div class="card" onclick="openPopup('Contact', '📧 selvakumaran134@gmail.com\n📘 Facebook\n📸 Instagram\n🔗 LinkedIn')">
+      📞 Contact
+    </div>
   </div>
 
-  <!-- JavaScript -->
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h2 id="popup-title"></h2>
+      <p id="popup-text"></p>
+      <button onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <!-- JS -->
   <script>
-    const toggleButton = document.getElementById('theme-toggle');
-    const body = document.body;
+    const popup = document.getElementById('popup');
+    const popupTitle = document.getElementById('popup-title');
+    const popupText = document.getElementById('popup-text');
 
-    toggleButton.addEventListener('click', () => {
-      if (body.classList.contains('dark-theme')) {
-        body.classList.remove('dark-theme');
-        body.classList.add('light-theme');
-        toggleButton.textContent = '☀️ Light Mode';
-      } else {
-        body.classList.remove('light-theme');
-        body.classList.add('dark-theme');
-        toggleButton.textContent = '🌙 Dark Mode';
-      }
-    });
-
-    // Contact Form (Dummy Response)
-    function submitForm() {
-      document.getElementById('form-response').innerText = "Thank you! I'll contact you soon.";
-      return false; // Prevent actual form submission
+    function openPopup(title, text) {
+      popupTitle.innerText = title;
+      popupText.innerText = text;
+      popup.style.display = 'flex';
     }
+
+    function closePopup() {
+      popup.style.display = 'none';
+    }
+
+    const themeBtn = document.getElementById('theme-toggle');
+    themeBtn.onclick = () => {
+      document.body.classList.toggle('light-theme');
+      themeBtn.textContent = document.body.classList.contains('light-theme') ? '☀️' : '🌙';
+    };
   </script>
 
 </body>
