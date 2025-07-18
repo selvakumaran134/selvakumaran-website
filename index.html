@@ -94,7 +94,8 @@
     /* Popup Windows */
     .popup {
       position: fixed;
-      top: 50%; left: 50%;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%) scale(0);
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(20px);
@@ -102,7 +103,7 @@
       width: 95%;
       max-width: 500px;
       border-radius: 20px;
-      padding: 30px 20px;
+      padding: 30px 20px 20px 20px;
       text-align: center;
       z-index: 20;
       transition: transform 0.4s ease;
@@ -134,20 +135,20 @@
     }
 
     .close-btn {
-      display: inline-block;
-      margin-top: 20px;
-      background: #FF1493;
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: transparent;
       color: white;
-      padding: 10px 20px;
-      border-radius: 20px;
+      font-size: 24px;
       font-weight: bold;
+      border: none;
       cursor: pointer;
     }
 
     .close-btn:hover {
-      background: #ff69b4;
+      color: #FF1493;
     }
-
   </style>
 </head>
 <body>
@@ -177,45 +178,50 @@
 
   <!-- Skills Popup -->
   <div id="skillsPopup" class="popup">
+    <button class="close-btn" onclick="closePopup('skillsPopup')">❌</button>
     <h2>🛠 My Skills</h2>
     <p>⚡ HTML, CSS, JavaScript<br>
        ⚙️ ESP32 & IoT Projects<br>
        🛠️ Video Editing (YouTube)<br>
        📲 Mobile-first Web Design</p>
-    <div class="close-btn" onclick="closePopup('skillsPopup')">Close</div>
   </div>
 
   <!-- Projects Popup -->
   <div id="projectsPopup" class="popup">
+    <button class="close-btn" onclick="closePopup('projectsPopup')">❌</button>
     <h2>💼 My Projects</h2>
     <p>🔋 Smart Home Energy Monitoring System<br>
        🌦️ IoT-based Weather Monitor<br>
        🎬 YouTube Edits & Tech Tips</p>
-    <div class="close-btn" onclick="closePopup('projectsPopup')">Close</div>
   </div>
 
   <!-- Certificates Popup -->
   <div id="certificatesPopup" class="popup">
+    <button class="close-btn" onclick="closePopup('certificatesPopup')">❌</button>
     <h2>📜 Certificates</h2>
     <p>🎖️ IoT Project Certification<br>
        🎖️ Web Development Training<br>
        🎖️ Video Editing Masterclass</p>
-    <div class="close-btn" onclick="closePopup('certificatesPopup')">Close</div>
   </div>
 
   <!-- Contact Popup -->
   <div id="contactPopup" class="popup">
+    <button class="close-btn" onclick="closePopup('contactPopup')">❌</button>
     <h2>📧 Contact Me</h2>
     <a href="mailto:selvakumaran134@gmail.com" class="social-btn" target="_blank">📧 Gmail</a>
     <a href="https://www.facebook.com/share/1BtVZYgnYD/" class="social-btn" target="_blank">📘 Facebook</a>
     <a href="https://www.instagram.com/selvakumaran_134" class="social-btn" target="_blank">📸 Instagram</a>
     <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" class="social-btn" target="_blank">🔗 LinkedIn</a>
-    <div class="close-btn" onclick="closePopup('contactPopup')">Close</div>
   </div>
 
   <!-- Script -->
   <script>
     function openPopup(id) {
+      // Close all open popups
+      const popups = document.querySelectorAll('.popup');
+      popups.forEach(popup => popup.classList.remove('show'));
+
+      // Open the selected popup
       document.getElementById(id).classList.add('show');
     }
 
