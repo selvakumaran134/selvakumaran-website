@@ -52,7 +52,7 @@
       transition: 0.3s ease;
     }
     nav ul li a:hover {
-      background: red;
+      background: #9E0D5F;
     }
     .home-container {
       position: absolute;
@@ -80,26 +80,18 @@
       font-size: 1.1em;
       margin-bottom: 15px;
     }
-    .social-btn {
-      display: inline-block;
-      margin: 5px;
-      padding: 10px 20px;
-      background: red;
-      color: white;
-      text-decoration: none;
-      border-radius: 20px;
-      font-weight: bold;
-    }
+
+    /* Popup Windows */
     .popup {
       position: fixed;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%) scale(0);
-      background: rgba(255,255,255,0.95);
-      color: black;
-      width: 90%;
-      max-width: 400px;
+      background: #9E0D5F;
+      color: white;
+      width: 95%;
+      max-width: 600px;
       border-radius: 20px;
-      padding: 20px;
+      padding: 30px 20px;
       text-align: center;
       z-index: 20;
       transition: transform 0.4s ease;
@@ -113,6 +105,7 @@
     .popup ul {
       list-style: none;
       text-align: left;
+      font-size: 1.1em;
     }
     .popup ul li {
       margin-bottom: 10px;
@@ -121,10 +114,25 @@
       display: inline-block;
       margin-top: 15px;
       padding: 8px 15px;
-      background: red;
-      color: white;
+      background: white;
+      color: #9E0D5F;
       border-radius: 20px;
       cursor: pointer;
+      font-weight: bold;
+    }
+    .social-btn {
+      display: inline-block;
+      margin: 8px;
+      padding: 12px 20px;
+      background: white;
+      color: #9E0D5F;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 25px;
+      transition: 0.3s ease;
+    }
+    .social-btn:hover {
+      background: #ddd;
     }
   </style>
 </head>
@@ -150,11 +158,6 @@
     <img src="https://i.postimg.cc/zfykMWX1/1732294109483.jpg" class="profile-pic">
     <h1>Selvakumaran M</h1>
     <p>Tech enthusiast building smart systems.</p>
-
-    <a href="mailto:selvakumaran134@gmail.com" class="social-btn">📧 Gmail</a>
-    <a href="https://www.facebook.com/share/1BtVZYgnYD/" target="_blank" class="social-btn">📘 Facebook</a>
-    <a href="https://www.instagram.com/selvakumaran_134" target="_blank" class="social-btn">📸 Instagram</a>
-    <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" target="_blank" class="social-btn">🔗 LinkedIn</a>
   </div>
 
   <!-- Popups -->
@@ -191,12 +194,14 @@
 
   <div id="contact" class="popup">
     <h2>Contact Me</h2>
-    <p>Email: selvakumaran134@gmail.com</p>
-    <p>Click social buttons on Home screen to contact.</p>
+    <a href="mailto:selvakumaran134@gmail.com" class="social-btn">📧 Gmail</a>
+    <a href="https://www.facebook.com/share/1BtVZYgnYD/" target="_blank" class="social-btn">📘 Facebook</a>
+    <a href="https://www.instagram.com/selvakumaran_134" target="_blank" class="social-btn">📸 Instagram</a>
+    <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" target="_blank" class="social-btn">🔗 LinkedIn</a>
     <div class="close-btn" onclick="closePopup()">Close</div>
   </div>
 
-  <!-- Scripts -->
+  <!-- Script -->
   <script>
     function showPopup(id) {
       closePopup();
