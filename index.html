@@ -16,9 +16,8 @@
     }
 
     body {
-      overflow: hidden;
+      overflow-x: hidden;
       background: black;
-      color: white;
     }
 
     /* Background Video */
@@ -30,14 +29,20 @@
       height: 100vh;
       object-fit: cover;
       z-index: -1;
-      opacity: 0.7;
+      opacity: 0.6;
+      pointer-events: none;
+      animation: zoomInOut 30s infinite alternate ease-in-out;
     }
 
-    /* Menu Bar */
+    @keyframes zoomInOut {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+
+    /* Navigation Menu */
     nav {
       width: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 10px 0;
+      background: rgba(0, 0, 0, 0.6);
       position: fixed;
       top: 0;
       left: 0;
@@ -49,7 +54,9 @@
     nav ul {
       display: flex;
       list-style: none;
-      gap: 20px;
+      gap: 15px;
+      flex-wrap: wrap;
+      padding: 10px;
     }
 
     nav ul li a {
@@ -58,169 +65,155 @@
       font-weight: bold;
       padding: 10px 20px;
       transition: 0.3s ease;
+      border-radius: 15px;
     }
 
     nav ul li a:hover {
-      background: #FF1493;
-      border-radius: 20px;
+      background: pink;
+      color: black;
     }
 
-    /* Home Section */
-    .container {
-      margin-top: 120px;
-      text-align: center;
-    }
-
-    .profile-pic {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid rgba(255, 255, 255, 0.5);
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: 2em;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 1.2em;
-      max-width: 500px;
-      margin: 0 auto 30px;
-    }
-
-    /* Popup Windows */
+    /* Pop-up Section */
     .popup {
+      display: none;
       position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(25px);
+      padding: 30px;
       color: white;
-      width: 95%;
-      max-width: 500px;
-      border-radius: 20px;
-      padding: 30px 20px;
-      text-align: center;
       z-index: 20;
-      transition: transform 0.4s ease;
-    }
-
-    .popup.show {
-      transform: translate(-50%, -50%) scale(1);
+      width: 90%;
+      max-width: 600px;
+      border-radius: 20px;
+      text-align: center;
     }
 
     .popup h2 {
-      font-size: 1.5em;
       margin-bottom: 20px;
     }
 
-    .social-btn {
+    .popup a {
       display: inline-block;
       margin: 10px;
-      padding: 12px 20px;
-      background: #FF1493;
-      color: white;
+      padding: 12px 24px;
+      background: pink;
+      color: black;
       font-weight: bold;
+      border-radius: 30px;
       text-decoration: none;
-      border-radius: 25px;
       transition: 0.3s ease;
     }
 
-    .social-btn:hover {
-      background: #ff69b4;
+    .popup a:hover {
+      background: hotpink;
     }
 
     .close-btn {
-      display: inline-block;
-      margin-top: 20px;
-      background: #FF1493;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 20px;
+      background: pink;
+      color: black;
       font-weight: bold;
+      padding: 8px 16px;
+      border-radius: 20px;
       cursor: pointer;
+      margin-bottom: 20px;
     }
 
-    .close-btn:hover {
-      background: #ff69b4;
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 30px auto 10px;
+      display: block;
+      border: 3px solid pink;
     }
 
+    h1 {
+      text-align: center;
+      font-size: 2em;
+      color: white;
+      background: linear-gradient(to right, pink, hotpink);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
   </style>
 </head>
+
 <body>
 
   <!-- Background Video -->
-  <video autoplay muted loop id="bg-video">
+  <video autoplay muted loop playsinline id="bg-video">
     <source src="background.webm" type="video/webm">
     Your browser does not support the video tag.
   </video>
 
-  <!-- Menu -->
+  <!-- Navbar -->
   <nav>
     <ul>
-      <li><a href="#" onclick="openPopup('skillsPopup')">Skills</a></li>
-      <li><a href="#" onclick="openPopup('projectsPopup')">Projects</a></li>
-      <li><a href="#" onclick="openPopup('certificatesPopup')">Certificates</a></li>
-      <li><a href="#" onclick="openPopup('contactPopup')">Contact</a></li>
+      <li><a href="#" onclick="openPopup('home-popup')">Home</a></li>
+      <li><a href="#" onclick="openPopup('skills-popup')">Skills</a></li>
+      <li><a href="#" onclick="openPopup('projects-popup')">Projects</a></li>
+      <li><a href="#" onclick="openPopup('certificates-popup')">Certificates</a></li>
+      <li><a href="#" onclick="openPopup('contact-popup')">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- Fixed Home Section -->
-  <div class="container">
+  <!-- Popups -->
+  <div id="home-popup" class="popup">
+    <div class="close-btn" onclick="closeAll()">Close ✖️</div>
     <img src="https://i.postimg.cc/zfykMWX1/1732294109483.jpg" alt="Selvakumaran M" class="profile-pic">
     <h1>Selvakumaran M</h1>
-    <p>Hello! I’m Selvakumaran M, a tech enthusiast building smart systems. Welcome to my personal website.</p>
+    <p>Tech enthusiast building smart systems.<br> Welcome to my personal website.</p>
   </div>
 
-  <!-- Skills Popup -->
-  <div id="skillsPopup" class="popup">
+  <div id="skills-popup" class="popup">
+    <div class="close-btn" onclick="closeAll()">Close ✖️</div>
     <h2>🛠 My Skills</h2>
-    <p>⚡ HTML, CSS, JavaScript<br>
-       ⚙️ ESP32 & IoT Projects<br>
-       🛠️ Video Editing (YouTube)<br>
-       📲 Mobile-first Web Design</p>
-    <div class="close-btn" onclick="closePopup('skillsPopup')">Close</div>
+    <p>⚡ HTML, CSS, JavaScript</p>
+    <p>⚙️ ESP32 & IoT Projects</p>
+    <p>🛠️ Video Editing (YouTube)</p>
+    <p>📲 Mobile-first Web Design</p>
   </div>
 
-  <!-- Projects Popup -->
-  <div id="projectsPopup" class="popup">
-    <h2>💼 My Projects</h2>
-    <p>🔋 Smart Home Energy Monitoring System<br>
-       🌦️ IoT-based Weather Monitor<br>
-       🎬 YouTube Edits & Tech Tips</p>
-    <div class="close-btn" onclick="closePopup('projectsPopup')">Close</div>
+  <div id="projects-popup" class="popup">
+    <div class="close-btn" onclick="closeAll()">Close ✖️</div>
+    <h2>💼 Projects</h2>
+    <p>🔋 Smart Home Energy Monitoring System</p>
+    <p>🌦️ IoT-based Weather & Battery Monitor</p>
+    <p>🎬 YouTube Edits – Vlogs & Tech Tips</p>
   </div>
 
-  <!-- Certificates Popup -->
-  <div id="certificatesPopup" class="popup">
+  <div id="certificates-popup" class="popup">
+    <div class="close-btn" onclick="closeAll()">Close ✖️</div>
     <h2>📜 Certificates</h2>
-    <p>🎖️ IoT Project Certification<br>
-       🎖️ Web Development Training<br>
-       🎖️ Video Editing Masterclass</p>
-    <div class="close-btn" onclick="closePopup('certificatesPopup')">Close</div>
+    <p>🚀 Certification 1</p>
+    <p>🚀 Certification 2</p>
+    <p>🚀 Certification 3</p>
   </div>
 
-  <!-- Contact Popup -->
-  <div id="contactPopup" class="popup">
-    <h2>📧 Contact Me</h2>
-    <a href="mailto:selvakumaran134@gmail.com" class="social-btn" target="_blank">📧 Gmail</a>
-    <a href="https://www.facebook.com/share/1BtVZYgnYD/" class="social-btn" target="_blank">📘 Facebook</a>
-    <a href="https://www.instagram.com/selvakumaran_134" class="social-btn" target="_blank">📸 Instagram</a>
-    <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" class="social-btn" target="_blank">🔗 LinkedIn</a>
-    <div class="close-btn" onclick="closePopup('contactPopup')">Close</div>
+  <div id="contact-popup" class="popup">
+    <div class="close-btn" onclick="closeAll()">Close ✖️</div>
+    <h2>📬 Contact Me</h2>
+    <a href="mailto:selvakumaran134@gmail.com" target="_blank">📧 Gmail</a>
+    <a href="https://www.facebook.com/share/1BtVZYgnYD/" target="_blank">📘 Facebook</a>
+    <a href="https://www.instagram.com/selvakumaran_134" target="_blank">📸 Instagram</a>
+    <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" target="_blank">🔗 LinkedIn</a>
   </div>
 
-  <!-- Script -->
+  <!-- JavaScript -->
   <script>
     function openPopup(id) {
-      document.getElementById(id).classList.add('show');
+      closeAll();
+      document.getElementById(id).style.display = 'block';
     }
 
-    function closePopup(id) {
-      document.getElementById(id).classList.remove('show');
+    function closeAll() {
+      const popups = document.querySelectorAll('.popup');
+      popups.forEach(popup => popup.style.display = 'none');
     }
   </script>
 
