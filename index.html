@@ -2,12 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Selvakumaran M – Personal Website</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Selvakumaran M – Portfolio</title>
   <style>
     * {
       margin: 0;
@@ -15,135 +11,120 @@
       box-sizing: border-box;
       font-family: 'Inter', sans-serif;
     }
-
     body {
-      overflow-x: hidden;
       background: black;
+      overflow: hidden;
     }
-
-    /* Background Video */
-    #bg-video {
+    video#bg-video {
       position: fixed;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100vw;
       height: 100vh;
       object-fit: cover;
       z-index: -1;
-      opacity: 0.7;
+      animation: zoomVideo 20s ease-in-out infinite alternate;
     }
-
-    /* Navigation Menu */
+    @keyframes zoomVideo {
+      from { transform: scale(1); }
+      to { transform: scale(1.2); }
+    }
     nav {
-      width: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 10px 0;
       position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 10;
+      top: 0; left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.6);
       display: flex;
       justify-content: center;
+      padding: 10px 0;
+      z-index: 10;
     }
-
     nav ul {
       display: flex;
       list-style: none;
       gap: 20px;
     }
-
     nav ul li a {
       color: white;
       text-decoration: none;
       font-weight: bold;
       padding: 10px 20px;
+      border-radius: 20px;
       transition: 0.3s ease;
     }
-
     nav ul li a:hover {
-      background: #ff0000;
-      border-radius: 20px;
+      background: red;
     }
-
-    /* Content Container */
-    .container {
-      margin-top: 100px;
-      max-width: 800px;
-      width: 95%;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 20px;
-      backdrop-filter: blur(25px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 40px 20px;
-      color: white;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    .home-container {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .profile-pic {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid rgba(255,255,255,0.3);
-      box-shadow: 0 0 20px rgba(255,0,0,0.6);
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: 2.5em;
-      font-weight: 600;
-      background: linear-gradient(to right, #ff4e50, #f9d423);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 15px;
-    }
-
-    p {
-      font-size: 1.1em;
-      margin-bottom: 20px;
-    }
-
-    .button {
-      display: inline-block;
-      margin: 10px 10px;
-      padding: 12px 24px;
-      background: #ff0000;
       color: white;
-      font-weight: bold;
-      border: none;
-      border-radius: 30px;
-      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
-      text-decoration: none;
-      transition: 0.3s ease;
+      padding: 20px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 20px;
     }
-
-    .button:hover {
-      background: #cc0000;
+    .profile-pic {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid white;
+      object-fit: cover;
+      margin-bottom: 20px;
     }
-
-    h2 {
+    h1 {
       font-size: 2em;
-      margin: 30px 0 10px;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      font-size: 1.1em;
-    }
-
-    ul li {
       margin-bottom: 10px;
     }
-
-    @media(max-width: 768px) {
-      .profile-pic {
-        width: 100px;
-        height: 100px;
-      }
+    p {
+      font-size: 1.1em;
+      margin-bottom: 15px;
+    }
+    .social-btn {
+      display: inline-block;
+      margin: 5px;
+      padding: 10px 20px;
+      background: red;
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+    .popup {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: rgba(255,255,255,0.95);
+      color: black;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 20px;
+      padding: 20px;
+      text-align: center;
+      z-index: 20;
+      transition: transform 0.4s ease;
+    }
+    .popup.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .popup h2 {
+      margin-bottom: 15px;
+    }
+    .popup ul {
+      list-style: none;
+      text-align: left;
+    }
+    .popup ul li {
+      margin-bottom: 10px;
+    }
+    .close-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 15px;
+      background: red;
+      color: white;
+      border-radius: 20px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -152,57 +133,79 @@
   <!-- Background Video -->
   <video autoplay muted loop id="bg-video">
     <source src="background.webm" type="video/webm">
-    Your browser does not support the video tag.
   </video>
 
-  <!-- Navigation Bar -->
+  <!-- Menu -->
   <nav>
     <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#achievements">Achievements</a></li>
-      <li><a href="#certifications">Certifications</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#" onclick="showPopup('skills')">Skills</a></li>
+      <li><a href="#" onclick="showPopup('projects')">Projects</a></li>
+      <li><a href="#" onclick="showPopup('certificates')">Certificates</a></li>
+      <li><a href="#" onclick="showPopup('contact')">Contact</a></li>
     </ul>
   </nav>
 
-  <!-- Content -->
-  <div class="container" id="home">
-    <img src="https://i.postimg.cc/zfykMWX1/1732294109483.jpg" alt="Selvakumaran M" class="profile-pic">
+  <!-- Home -->
+  <div class="home-container">
+    <img src="https://i.postimg.cc/zfykMWX1/1732294109483.jpg" class="profile-pic">
     <h1>Selvakumaran M</h1>
-    <p>Hello! I’m Selvakumaran M, a tech enthusiast building smart systems. Welcome to my personal website.</p>
+    <p>Tech enthusiast building smart systems.</p>
 
-    <a href="mailto:selvakumaran134@gmail.com" class="button" target="_blank">📧 Gmail</a>
-    <a href="https://www.facebook.com/share/1BtVZYgnYD/" class="button" target="_blank">📘 Facebook</a>
-    <a href="https://www.instagram.com/selvakumaran_134" class="button" target="_blank">📸 Instagram</a>
-    <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" class="button" target="_blank">🔗 LinkedIn</a>
-    <a href="resume.pdf" class="button" target="_blank">📄 View Resume</a>
+    <a href="mailto:selvakumaran134@gmail.com" class="social-btn">📧 Gmail</a>
+    <a href="https://www.facebook.com/share/1BtVZYgnYD/" target="_blank" class="social-btn">📘 Facebook</a>
+    <a href="https://www.instagram.com/selvakumaran_134" target="_blank" class="social-btn">📸 Instagram</a>
+    <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" target="_blank" class="social-btn">🔗 LinkedIn</a>
+  </div>
 
-    <h2 id="skills">🧠 My Skills</h2>
+  <!-- Popups -->
+  <div id="skills" class="popup">
+    <h2>My Skills</h2>
     <ul>
       <li>⚡ HTML, CSS, JavaScript</li>
       <li>⚙️ ESP32 & IoT Projects</li>
-      <li>🛠️ Video Editing (YouTube)</li>
-      <li>📲 Mobile-first Web Design</li>
+      <li>🛠️ Video Editing</li>
+      <li>📲 Responsive Web Design</li>
     </ul>
-
-    <h2 id="projects">💼 Projects</h2>
-    <ul>
-      <li>🔋 Smart Home Energy Monitoring System</li>
-      <li>🌦️ IoT-based Weather and Battery Monitor</li>
-      <li>🎬 YouTube Edits – Vlogs & Tech Tips</li>
-    </ul>
-
-    <h2 id="achievements">🏆 Achievements</h2>
-    <p>To be added soon...</p>
-
-    <h2 id="certifications">📜 Certifications</h2>
-    <p>To be added soon...</p>
-
-    <h2 id="contact">📞 Contact Me</h2>
-    <p>Email: selvakumaran134@gmail.com</p>
+    <div class="close-btn" onclick="closePopup()">Close</div>
   </div>
+
+  <div id="projects" class="popup">
+    <h2>Projects</h2>
+    <ul>
+      <li>🔋 Smart Home Energy Monitoring</li>
+      <li>🌦️ IoT-based Weather Monitor</li>
+      <li>🎬 YouTube Tech Videos</li>
+    </ul>
+    <div class="close-btn" onclick="closePopup()">Close</div>
+  </div>
+
+  <div id="certificates" class="popup">
+    <h2>Certificates</h2>
+    <ul>
+      <li>📜 Web Development Certificate</li>
+      <li>📜 IoT Training Completion</li>
+      <li>📜 Video Editing Workshop</li>
+    </ul>
+    <div class="close-btn" onclick="closePopup()">Close</div>
+  </div>
+
+  <div id="contact" class="popup">
+    <h2>Contact Me</h2>
+    <p>Email: selvakumaran134@gmail.com</p>
+    <p>Click social buttons on Home screen to contact.</p>
+    <div class="close-btn" onclick="closePopup()">Close</div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    function showPopup(id) {
+      closePopup();
+      document.getElementById(id).classList.add('show');
+    }
+    function closePopup() {
+      document.querySelectorAll('.popup').forEach(p => p.classList.remove('show'));
+    }
+  </script>
 
 </body>
 </html>
