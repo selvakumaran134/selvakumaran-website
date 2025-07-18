@@ -1,264 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Selvakumaran M's official personal website. Showcasing IoT projects, web skills, and certifications.">
+  <meta name="keywords" content="Selvakumaran M, IoT, ESP32, Web Developer, Portfolio">
+  <meta name="author" content="Selvakumaran M">
   <title>Selvakumaran M – Personal Website</title>
-
+  <link rel="icon" href="favicon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
+    * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif;}
+    body {overflow: hidden; background: black; color: white; transition: 0.5s ease background, 0.5s ease color;}
 
-    body {
-      overflow: hidden;
-      background: black;
-      color: white;
-    }
+    #bg-video {position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -1;
+      opacity: 0.7; animation: zoomEffect 30s infinite alternate ease-in-out;}
 
-    /* Background Video */
-    #bg-video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: -1;
-      opacity: 0.7;
-    }
+    @keyframes zoomEffect {from {transform: scale(1);} to {transform: scale(1.2);}}
 
-    /* Menu Bar */
-    nav {
-      width: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 10px 0;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 10;
-      display: flex;
-      justify-content: center;
-    }
+    nav {width: 100%; background: rgba(0,0,0,0.7); padding: 10px 0; position: fixed; top: 0; left: 0; z-index: 10; display: flex; justify-content: center;}
+    nav ul {display: flex; list-style: none; gap: 20px;}
+    nav ul li a {color: white; text-decoration: none; font-weight: bold; padding: 10px 20px; border-radius: 20px; transition: 0.3s ease;}
+    nav ul li a:hover {background: #FF1493;}
 
-    nav ul {
-      display: flex;
-      list-style: none;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
+    .toggle-btn {margin-left: 10px; background: #FF1493; color: white; border: none; border-radius: 20px; padding: 5px 15px; font-weight: bold; cursor: pointer;}
 
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 10px 20px;
-      transition: 0.3s ease;
-    }
+    .container {margin-top: 120px; text-align: center;}
+    .profile-pic {width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,0.5); margin-bottom: 20px;}
+    h1 {font-size: 2em; margin-bottom: 10px;}
+    p.typing {font-size: 1.2em; max-width: 500px; margin: 0 auto 30px; min-height: 40px; white-space: nowrap; overflow: hidden; border-right: 2px solid #FF1493;}
 
-    nav ul li a:hover {
-      background: #FF1493;
-      border-radius: 20px;
-    }
+    .popup {position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+      background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); color: white; width: 95%; max-width: 500px;
+      border-radius: 20px; padding: 30px 20px; text-align: center; z-index: 20; transition: transform 0.4s ease;}
+    .popup.show {transform: translate(-50%, -50%) scale(1);}
 
-    /* Home Section */
-    .container {
-      margin-top: 120px;
-      text-align: center;
-      padding: 0 20px;
-    }
+    .popup a, .social-btn {display: inline-block; margin: 10px; padding: 12px 20px; background: #FF1493; color: white;
+      font-weight: bold; text-decoration: none; border-radius: 25px; transition: 0.3s ease; box-shadow: 0 0 8px #FF1493;}
+    .popup a:hover, .social-btn:hover {background: #ff69b4; box-shadow: 0 0 15px #ff69b4, 0 0 30px #ff69b4;}
 
-    .profile-pic {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid rgba(255, 255, 255, 0.5);
-      margin-bottom: 20px;
-    }
+    .close-btn {position: absolute; top: 10px; right: 15px; font-size: 1.5em; cursor: pointer; color: #FF1493;}
+    .close-btn:hover {color: #ff69b4;}
 
-    h1 {
-      font-size: 2em;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 1.2em;
-      max-width: 500px;
-      margin: 0 auto 30px;
-    }
-
-    /* Popup Windows */
-    .popup {
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(20px);
-      color: white;
-      width: 95%;
-      max-width: 500px;
-      border-radius: 20px;
-      padding: 30px 20px;
-      text-align: center;
-      z-index: 20;
-      transition: transform 0.4s ease;
-    }
-
-    .popup.show {
-      transform: translate(-50%, -50%) scale(1);
-    }
-
-    .popup h2 {
-      font-size: 1.5em;
-      margin-bottom: 20px;
-    }
-
-    .social-btn {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 20px;
-      background: #FF1493;
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-      border-radius: 25px;
-      transition: 0.3s ease;
-    }
-
-    .social-btn:hover {
-      background: #ff69b4;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      font-size: 20px;
-      cursor: pointer;
-      color: #FF1493;
-      font-weight: bold;
-    }
-
-    .close-btn:hover {
-      color: #ff69b4;
-    }
-
-    @media(max-width: 768px) {
-      nav ul {
-        gap: 10px;
-      }
-
-      nav ul li a {
-        padding: 8px 12px;
-        font-size: 14px;
-      }
-
-      .profile-pic {
-        width: 100px;
-        height: 100px;
-      }
-
-      h1 {
-        font-size: 1.5em;
-      }
-
-      p {
-        font-size: 1em;
-      }
-
-      .popup {
-        width: 90%;
-        max-width: 95%;
-      }
-    }
+    .light-mode {background: white; color: black;}
+    .light-mode nav {background: rgba(255,255,255,0.9);}
+    .light-mode .popup {color: black;}
   </style>
 </head>
 <body>
 
-  <!-- Background Video -->
-  <video autoplay muted loop id="bg-video">
-    <source src="background.webm" type="video/webm">
-    Your browser does not support the video tag.
-  </video>
+<video autoplay muted loop id="bg-video">
+  <source src="background.webm" type="video/webm">
+</video>
 
-  <!-- Menu -->
-  <nav>
-    <ul>
-      <li><a href="#" onclick="openPopup('skillsPopup')">Skills</a></li>
-      <li><a href="#" onclick="openPopup('projectsPopup')">Projects</a></li>
-      <li><a href="#" onclick="openPopup('certificatesPopup')">Certificates</a></li>
-      <li><a href="#" onclick="openPopup('contactPopup')">Contact</a></li>
-    </ul>
-  </nav>
+<nav>
+  <ul>
+    <li><a href="#" onclick="openPopup('skillsPopup')">Skills</a></li>
+    <li><a href="#" onclick="openPopup('projectsPopup')">Projects</a></li>
+    <li><a href="#" onclick="openPopup('certificatesPopup')">Certificates</a></li>
+    <li><a href="#" onclick="openPopup('contactPopup')">Contact</a></li>
+  </ul>
+  <button onclick="toggleTheme()" class="toggle-btn">🌙 Mode</button>
+</nav>
 
-  <!-- Fixed Home Section -->
-  <div class="container">
-    <img src="https://i.postimg.cc/zfykMWX1/1732294109483.jpg" alt="Selvakumaran M" class="profile-pic">
-    <h1>Selvakumaran M</h1>
-    <p>Hello! I’m Selvakumaran M, a tech enthusiast building smart systems. Welcome to my personal website.</p>
-  </div>
+<div class="container">
+  <img src="https://i.postimg.cc/zfykMWX1/1732294109483.jpg" alt="Selvakumaran M" class="profile-pic">
+  <h1>Selvakumaran M</h1>
+  <p id="typed-text" class="typing"></p>
+</div>
 
-  <!-- Skills Popup -->
-  <div id="skillsPopup" class="popup">
-    <div class="close-btn" onclick="closePopup('skillsPopup')">✖</div>
-    <h2>🛠 My Skills</h2>
-    <p>⚡ HTML, CSS, JavaScript<br>
-       ⚙️ ESP32 & IoT Projects<br>
-       🛠️ Video Editing (YouTube)<br>
-       📲 Mobile-first Web Design</p>
-  </div>
+<div id="skillsPopup" class="popup">
+  <span class="close-btn" onclick="closePopup('skillsPopup')">✖</span>
+  <h2>🛠 My Skills</h2>
+  <p>⚡ HTML, CSS, JavaScript<br>⚙️ ESP32 & IoT Projects<br>🛠️ Video Editing (YouTube)<br>📲 Mobile-first Web Design</p>
+</div>
 
-  <!-- Projects Popup -->
-  <div id="projectsPopup" class="popup">
-    <div class="close-btn" onclick="closePopup('projectsPopup')">✖</div>
-    <h2>💼 My Projects</h2>
-    <p>🔋 Smart Home Energy Monitoring System<br>
-       🌦️ IoT-based Weather Monitor<br>
-       🎬 YouTube Edits & Tech Tips</p>
-  </div>
+<div id="projectsPopup" class="popup">
+  <span class="close-btn" onclick="closePopup('projectsPopup')">✖</span>
+  <h2>💼 My Projects</h2>
+  <p>
+    <a href="https://github.com/selvakumaran134/project1" target="_blank">🔋 Smart Energy Monitor</a><br>
+    <a href="https://github.com/selvakumaran134/project2" target="_blank">🌦️ IoT Weather Station</a><br>
+  </p>
+</div>
 
-  <!-- Certificates Popup -->
-  <div id="certificatesPopup" class="popup">
-    <div class="close-btn" onclick="closePopup('certificatesPopup')">✖</div>
-    <h2>📜 Certificates</h2>
-    <p>🎖️ IoT Project Certification<br>
-       🎖️ Web Development Training<br>
-       🎖️ Video Editing Masterclass</p>
-  </div>
+<div id="certificatesPopup" class="popup">
+  <span class="close-btn" onclick="closePopup('certificatesPopup')">✖</span>
+  <h2>📜 Certificates</h2>
+  <p>
+    <a href="certificate1.pdf" target="_blank">🎖️ IoT Project Certificate</a><br>
+    <a href="certificate2.pdf" target="_blank">🎖️ Web Development Certificate</a>
+  </p>
+</div>
 
-  <!-- Contact Popup -->
-  <div id="contactPopup" class="popup">
-    <div class="close-btn" onclick="closePopup('contactPopup')">✖</div>
-    <h2>📧 Contact Me</h2>
-    <a href="mailto:selvakumaran134@gmail.com" class="social-btn" target="_blank">📧 Gmail</a>
-    <a href="https://www.facebook.com/share/1BtVZYgnYD/" class="social-btn" target="_blank">📘 Facebook</a>
-    <a href="https://www.instagram.com/selvakumaran_134" class="social-btn" target="_blank">📸 Instagram</a>
-    <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" class="social-btn" target="_blank">🔗 LinkedIn</a>
-  </div>
+<div id="contactPopup" class="popup">
+  <span class="close-btn" onclick="closePopup('contactPopup')">✖</span>
+  <h2>📧 Contact Me</h2>
+  <a href="mailto:selvakumaran134@gmail.com" class="social-btn" target="_blank">📧 Gmail</a>
+  <a href="https://www.facebook.com/share/1BtVZYgnYD/" class="social-btn" target="_blank">📘 Facebook</a>
+  <a href="https://www.instagram.com/selvakumaran_134" class="social-btn" target="_blank">📸 Instagram</a>
+  <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" class="social-btn" target="_blank">🔗 LinkedIn</a>
+</div>
 
-  <!-- Script -->
-  <script>
-    function openPopup(id) {
-      closeAllPopups();
-      document.getElementById(id).classList.add('show');
+<script>
+  const texts = ["Tech Enthusiast", "Building Smart Systems", "Web Developer", "IoT Creator"];
+  let i = 0, j = 0, currentText = '', isDeleting = false;
+
+  function typeEffect() {
+    const target = document.getElementById("typed-text");
+    if (i >= texts.length) i = 0;
+    currentText = texts[i];
+    
+    if (!isDeleting) {
+      target.textContent = currentText.substring(0, j++);
+      if (j > currentText.length) {
+        isDeleting = true;
+        setTimeout(typeEffect, 1500);
+        return;
+      }
+    } else {
+      target.textContent = currentText.substring(0, j--);
+      if (j < 0) {
+        isDeleting = false;
+        i++;
+      }
     }
+    setTimeout(typeEffect, isDeleting ? 50 : 100);
+  }
 
-    function closePopup(id) {
-      document.getElementById(id).classList.remove('show');
-    }
+  function openPopup(id) {
+    document.querySelectorAll('.popup').forEach(p => p.classList.remove('show'));
+    document.getElementById(id).classList.add('show');
+  }
 
-    function closeAllPopups() {
-      const popups = document.querySelectorAll('.popup');
-      popups.forEach(popup => popup.classList.remove('show'));
-    }
-  </script>
+  function closePopup(id) {
+    document.getElementById(id).classList.remove('show');
+  }
+
+  function toggleTheme() {
+    document.body.classList.toggle('light-mode');
+  }
+
+  typeEffect();
+</script>
 
 </body>
 </html>
