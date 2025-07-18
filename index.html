@@ -1,149 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Selvakumaran M's official personal website. Showcasing IoT projects, web skills, and certifications.">
-  <meta name="keywords" content="Selvakumaran M, IoT, ESP32, Web Developer, Portfolio">
-  <meta name="author" content="Selvakumaran M">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Selvakumaran M – Personal Website</title>
-  <link rel="icon" href="favicon.png" type="image/png">
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet">
-
   <style>
-    * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif;}
-    body {overflow: hidden; background: black; color: white; transition: 0.5s ease background, 0.5s ease color;}
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { overflow: hidden; background: black; color: white; }
 
-    #bg-video {position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: -1;
-      opacity: 0.7; animation: zoomEffect 30s infinite alternate ease-in-out;}
+    #bg-video {
+      position: fixed; top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0.5;
+    }
 
-    @keyframes zoomEffect {from {transform: scale(1);} to {transform: scale(1.2);}}
+    nav {
+      width: 100%; background: rgba(0,0,0,0.8);
+      padding: 10px 0; position: fixed; top: 0;
+      left: 0; z-index: 10;
+      display: flex; justify-content: center; flex-wrap: wrap;
+    }
 
-    nav {width: 100%; background: rgba(0,0,0,0.7); padding: 10px 0; position: fixed; top: 0; left: 0; z-index: 10; display: flex; justify-content: center;}
-    nav ul {display: flex; list-style: none; gap: 20px;}
-    nav ul li a {color: white; text-decoration: none; font-weight: bold; padding: 10px 20px; border-radius: 20px; transition: 0.3s ease;}
-    nav ul li a:hover {background: #FF1493;}
+    nav ul { display: flex; list-style: none; gap: 10px; flex-wrap: wrap; }
+    nav ul li a {
+      color: white; text-decoration: none; font-weight: bold;
+      padding: 8px 15px;
+      background: #FF1493; border-radius: 25px;
+      transition: 0.3s ease; font-size: 14px;
+    }
+    nav ul li a:hover { background: #ff69b4; }
 
-    .toggle-btn {margin-left: 10px; background: #FF1493; color: white; border: none; border-radius: 20px; padding: 5px 15px; font-weight: bold; cursor: pointer;}
+    .container {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; height: 100vh; text-align: center;
+      padding: 20px;
+    }
 
-    .container {margin-top: 120px; text-align: center;}
-    .profile-pic {width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(255,255,255,0.5); margin-bottom: 20px;}
-    h1 {font-size: 2em; margin-bottom: 10px;}
-    p.typing {font-size: 1.2em; max-width: 500px; margin: 0 auto 30px; min-height: 40px; white-space: nowrap; overflow: hidden; border-right: 2px solid #FF1493;}
+    .profile-pic {
+      width: 130px; height: 130px; border-radius: 50%;
+      object-fit: cover; border: 3px solid white;
+      margin-bottom: 20px;
+    }
 
-    .popup {position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
-      background: rgba(255,255,255,0.05); backdrop-filter: blur(20px); color: white; width: 95%; max-width: 500px;
-      border-radius: 20px; padding: 30px 20px; text-align: center; z-index: 20; transition: transform 0.4s ease;}
-    .popup.show {transform: translate(-50%, -50%) scale(1);}
+    h1 {
+      font-size: 1.8em; font-weight: bold;
+      margin-bottom: 10px;
+    }
 
-    .popup a, .social-btn {display: inline-block; margin: 10px; padding: 12px 20px; background: #FF1493; color: white;
-      font-weight: bold; text-decoration: none; border-radius: 25px; transition: 0.3s ease; box-shadow: 0 0 8px #FF1493;}
-    .popup a:hover, .social-btn:hover {background: #ff69b4; box-shadow: 0 0 15px #ff69b4, 0 0 30px #ff69b4;}
+    .typing-text {
+      font-size: 1em; max-width: 300px; margin: 0 auto;
+      white-space: nowrap; overflow: hidden;
+      border-right: 2px solid pink;
+      animation: typing 3s steps(30) infinite alternate;
+    }
 
-    .close-btn {position: absolute; top: 10px; right: 15px; font-size: 1.5em; cursor: pointer; color: #FF1493;}
-    .close-btn:hover {color: #ff69b4;}
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
 
-    .light-mode {background: white; color: black;}
-    .light-mode nav {background: rgba(255,255,255,0.9);}
-    .light-mode .popup {color: black;}
+    .popup {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px);
+      color: white;
+      width: 90%; max-width: 400px;
+      border-radius: 15px;
+      padding: 20px 15px;
+      text-align: center;
+      z-index: 20;
+      transition: transform 0.3s ease;
+    }
+    .popup.show { transform: translate(-50%, -50%) scale(1); }
+
+    .popup h2 { font-size: 1.3em; margin-bottom: 15px; }
+    .popup p { font-size: 1em; }
+
+    .button {
+      display: inline-block; margin: 10px;
+      padding: 10px 20px;
+      background: #FF1493; color: white;
+      border: none; border-radius: 30px;
+      font-weight: bold; font-size: 14px;
+      text-decoration: none;
+      position: relative; overflow: hidden;
+    }
+    .button:hover { background: #ff69b4; }
+
+    .button::after {
+      content: ""; position: absolute;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%; transform: scale(0);
+      width: 100px; height: 100px;
+      top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0);
+      opacity: 0; pointer-events: none;
+    }
+    .button:active::after {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1; transition: 0.4s ease;
+    }
+
+    .close-btn {
+      position: absolute; top: 10px; right: 15px;
+      font-size: 20px; font-weight: bold;
+      cursor: pointer; color: pink;
+    }
+
+    @media(max-width: 480px) {
+      h1 { font-size: 1.5em; }
+      .typing-text { font-size: 0.9em; }
+    }
   </style>
 </head>
 <body>
 
-<video autoplay muted loop id="bg-video">
-  <source src="background.webm" type="video/webm">
-</video>
+  <video autoplay muted loop id="bg-video">
+    <source src="background.webm" type="video/webm">
+  </video>
 
-<nav>
-  <ul>
-    <li><a href="#" onclick="openPopup('skillsPopup')">Skills</a></li>
-    <li><a href="#" onclick="openPopup('projectsPopup')">Projects</a></li>
-    <li><a href="#" onclick="openPopup('certificatesPopup')">Certificates</a></li>
-    <li><a href="#" onclick="openPopup('contactPopup')">Contact</a></li>
-  </ul>
-  <button onclick="toggleTheme()" class="toggle-btn">🌙 Mode</button>
-</nav>
+  <nav>
+    <ul>
+      <li><a href="#" onclick="openPopup('projectsPopup')">Projects</a></li>
+      <li><a href="#" onclick="openPopup('certificatesPopup')">Certificates</a></li>
+      <li><a href="#" onclick="openPopup('contactPopup')">Contact</a></li>
+    </ul>
+  </nav>
 
-<div class="container">
-  <img src="https://i.postimg.cc/zfykMWX1/1732294109483.jpg" alt="Selvakumaran M" class="profile-pic">
-  <h1>Selvakumaran M</h1>
-  <p id="typed-text" class="typing"></p>
-</div>
+  <div class="container">
+    <img src="https://i.postimg.cc/zfykMWX1/1732294109483.jpg" class="profile-pic" alt="Selvakumaran M">
+    <h1>Selvakumaran M</h1>
+    <div class="typing-text">Tech Enthusiast • IoT Developer • YouTuber</div>
+  </div>
 
-<div id="skillsPopup" class="popup">
-  <span class="close-btn" onclick="closePopup('skillsPopup')">✖</span>
-  <h2>🛠 My Skills</h2>
-  <p>⚡ HTML, CSS, JavaScript<br>⚙️ ESP32 & IoT Projects<br>🛠️ Video Editing (YouTube)<br>📲 Mobile-first Web Design</p>
-</div>
+  <!-- Projects Popup -->
+  <div id="projectsPopup" class="popup">
+    <div class="close-btn" onclick="closePopup('projectsPopup')">✕</div>
+    <h2>💼 My Projects</h2>
+    <p>
+      <a href="#" class="button">Energy Monitoring</a><br>
+      <a href="#" class="button">Weather Monitor</a><br>
+      <a href="#" class="button">YouTube Channel</a>
+    </p>
+  </div>
 
-<div id="projectsPopup" class="popup">
-  <span class="close-btn" onclick="closePopup('projectsPopup')">✖</span>
-  <h2>💼 My Projects</h2>
-  <p>
-    <a href="https://github.com/selvakumaran134/project1" target="_blank">🔋 Smart Energy Monitor</a><br>
-    <a href="https://github.com/selvakumaran134/project2" target="_blank">🌦️ IoT Weather Station</a><br>
-  </p>
-</div>
+  <!-- Certificates Popup -->
+  <div id="certificatesPopup" class="popup">
+    <div class="close-btn" onclick="closePopup('certificatesPopup')">✕</div>
+    <h2>📜 Certificates</h2>
+    <p>
+      <a href="#" class="button">IoT Project Cert</a><br>
+      <a href="#" class="button">Web Dev Cert</a><br>
+      <a href="#" class="button">Video Editing Cert</a>
+    </p>
+  </div>
 
-<div id="certificatesPopup" class="popup">
-  <span class="close-btn" onclick="closePopup('certificatesPopup')">✖</span>
-  <h2>📜 Certificates</h2>
-  <p>
-    <a href="certificate1.pdf" target="_blank">🎖️ IoT Project Certificate</a><br>
-    <a href="certificate2.pdf" target="_blank">🎖️ Web Development Certificate</a>
-  </p>
-</div>
+  <!-- Contact Popup -->
+  <div id="contactPopup" class="popup">
+    <div class="close-btn" onclick="closePopup('contactPopup')">✕</div>
+    <h2>📧 Contact Me</h2>
+    <a href="mailto:selvakumaran134@gmail.com" class="button" target="_blank">Gmail</a>
+    <a href="https://www.facebook.com/share/1BtVZYgnYD/" class="button" target="_blank">Facebook</a>
+    <a href="https://www.instagram.com/selvakumaran_134" class="button" target="_blank">Instagram</a>
+    <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" class="button" target="_blank">LinkedIn</a>
+  </div>
 
-<div id="contactPopup" class="popup">
-  <span class="close-btn" onclick="closePopup('contactPopup')">✖</span>
-  <h2>📧 Contact Me</h2>
-  <a href="mailto:selvakumaran134@gmail.com" class="social-btn" target="_blank">📧 Gmail</a>
-  <a href="https://www.facebook.com/share/1BtVZYgnYD/" class="social-btn" target="_blank">📘 Facebook</a>
-  <a href="https://www.instagram.com/selvakumaran_134" class="social-btn" target="_blank">📸 Instagram</a>
-  <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" class="social-btn" target="_blank">🔗 LinkedIn</a>
-</div>
-
-<script>
-  const texts = ["Tech Enthusiast", "Building Smart Systems", "Web Developer", "IoT Creator"];
-  let i = 0, j = 0, currentText = '', isDeleting = false;
-
-  function typeEffect() {
-    const target = document.getElementById("typed-text");
-    if (i >= texts.length) i = 0;
-    currentText = texts[i];
-    
-    if (!isDeleting) {
-      target.textContent = currentText.substring(0, j++);
-      if (j > currentText.length) {
-        isDeleting = true;
-        setTimeout(typeEffect, 1500);
-        return;
-      }
-    } else {
-      target.textContent = currentText.substring(0, j--);
-      if (j < 0) {
-        isDeleting = false;
-        i++;
-      }
+  <script>
+    function openPopup(id) {
+      document.querySelectorAll('.popup').forEach(p => p.classList.remove('show'));
+      document.getElementById(id).classList.add('show');
     }
-    setTimeout(typeEffect, isDeleting ? 50 : 100);
-  }
 
-  function openPopup(id) {
-    document.querySelectorAll('.popup').forEach(p => p.classList.remove('show'));
-    document.getElementById(id).classList.add('show');
-  }
-
-  function closePopup(id) {
-    document.getElementById(id).classList.remove('show');
-  }
-
-  function toggleTheme() {
-    document.body.classList.toggle('light-mode');
-  }
-
-  typeEffect();
-</script>
+    function closePopup(id) {
+      document.getElementById(id).classList.remove('show');
+    }
+  </script>
 
 </body>
 </html>
