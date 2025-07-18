@@ -21,6 +21,7 @@
       color: white;
     }
 
+    /* Background Video */
     #bg-video {
       position: fixed;
       top: 0;
@@ -29,8 +30,10 @@
       height: 100vh;
       object-fit: cover;
       z-index: -1;
+      opacity: 0.7;
     }
 
+    /* Menu Bar */
     nav {
       width: 100%;
       background: rgba(0, 0, 0, 0.7);
@@ -46,8 +49,9 @@
     nav ul {
       display: flex;
       list-style: none;
-      gap: 20px;
       flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
     }
 
     nav ul li a {
@@ -63,10 +67,11 @@
       border-radius: 20px;
     }
 
+    /* Home Section */
     .container {
       margin-top: 120px;
       text-align: center;
-      padding: 0 15px;
+      padding: 0 20px;
     }
 
     .profile-pic {
@@ -83,30 +88,13 @@
       margin-bottom: 10px;
     }
 
-    /* Typing Animation */
-    .typing-text {
-      display: inline-block;
+    p {
       font-size: 1.2em;
-      max-width: 90%;
+      max-width: 500px;
       margin: 0 auto 30px;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid #fff;
-      animation:
-        typing 4s steps(50, end),
-        blink 0.75s step-end infinite;
     }
 
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
-
-    /* Popups */
+    /* Popup Windows */
     .popup {
       position: fixed;
       top: 50%; left: 50%;
@@ -151,10 +139,10 @@
     .close-btn {
       position: absolute;
       top: 10px;
-      right: 15px;
-      font-size: 24px;
-      color: #FF1493;
+      right: 20px;
+      font-size: 20px;
       cursor: pointer;
+      color: #FF1493;
       font-weight: bold;
     }
 
@@ -162,25 +150,45 @@
       color: #ff69b4;
     }
 
-    @media(max-width: 500px) {
+    @media(max-width: 768px) {
       nav ul {
         gap: 10px;
       }
+
+      nav ul li a {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+
       .profile-pic {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      p {
+        font-size: 1em;
+      }
+
+      .popup {
+        width: 90%;
+        max-width: 95%;
       }
     }
-
   </style>
 </head>
 <body>
 
+  <!-- Background Video -->
   <video autoplay muted loop id="bg-video">
     <source src="background.webm" type="video/webm">
     Your browser does not support the video tag.
   </video>
 
+  <!-- Menu -->
   <nav>
     <ul>
       <li><a href="#" onclick="openPopup('skillsPopup')">Skills</a></li>
@@ -190,15 +198,16 @@
     </ul>
   </nav>
 
+  <!-- Fixed Home Section -->
   <div class="container">
     <img src="https://i.postimg.cc/zfykMWX1/1732294109483.jpg" alt="Selvakumaran M" class="profile-pic">
     <h1>Selvakumaran M</h1>
-    <p class="typing-text">Hello! I’m Selvakumaran M, a tech enthusiast building smart systems. Welcome to my personal website.</p>
+    <p>Hello! I’m Selvakumaran M, a tech enthusiast building smart systems. Welcome to my personal website.</p>
   </div>
 
   <!-- Skills Popup -->
   <div id="skillsPopup" class="popup">
-    <div class="close-btn" onclick="closePopup()">×</div>
+    <div class="close-btn" onclick="closePopup('skillsPopup')">✖</div>
     <h2>🛠 My Skills</h2>
     <p>⚡ HTML, CSS, JavaScript<br>
        ⚙️ ESP32 & IoT Projects<br>
@@ -208,7 +217,7 @@
 
   <!-- Projects Popup -->
   <div id="projectsPopup" class="popup">
-    <div class="close-btn" onclick="closePopup()">×</div>
+    <div class="close-btn" onclick="closePopup('projectsPopup')">✖</div>
     <h2>💼 My Projects</h2>
     <p>🔋 Smart Home Energy Monitoring System<br>
        🌦️ IoT-based Weather Monitor<br>
@@ -217,7 +226,7 @@
 
   <!-- Certificates Popup -->
   <div id="certificatesPopup" class="popup">
-    <div class="close-btn" onclick="closePopup()">×</div>
+    <div class="close-btn" onclick="closePopup('certificatesPopup')">✖</div>
     <h2>📜 Certificates</h2>
     <p>🎖️ IoT Project Certification<br>
        🎖️ Web Development Training<br>
@@ -226,7 +235,7 @@
 
   <!-- Contact Popup -->
   <div id="contactPopup" class="popup">
-    <div class="close-btn" onclick="closePopup()">×</div>
+    <div class="close-btn" onclick="closePopup('contactPopup')">✖</div>
     <h2>📧 Contact Me</h2>
     <a href="mailto:selvakumaran134@gmail.com" class="social-btn" target="_blank">📧 Gmail</a>
     <a href="https://www.facebook.com/share/1BtVZYgnYD/" class="social-btn" target="_blank">📘 Facebook</a>
@@ -234,13 +243,18 @@
     <a href="https://www.linkedin.com/in/selvakumaran-m-02784b2b2" class="social-btn" target="_blank">🔗 LinkedIn</a>
   </div>
 
+  <!-- Script -->
   <script>
     function openPopup(id) {
-      closePopup();
+      closeAllPopups();
       document.getElementById(id).classList.add('show');
     }
 
-    function closePopup() {
+    function closePopup(id) {
+      document.getElementById(id).classList.remove('show');
+    }
+
+    function closeAllPopups() {
       const popups = document.querySelectorAll('.popup');
       popups.forEach(popup => popup.classList.remove('show'));
     }
