@@ -49,6 +49,8 @@
     nav ul {
       display: flex;
       list-style: none;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 20px;
     }
 
@@ -69,6 +71,7 @@
     .container {
       margin-top: 120px;
       text-align: center;
+      padding: 0 20px;
     }
 
     .profile-pic {
@@ -94,8 +97,7 @@
     /* Popup Windows */
     .popup {
       position: fixed;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%) scale(0);
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(20px);
@@ -103,7 +105,7 @@
       width: 95%;
       max-width: 500px;
       border-radius: 20px;
-      padding: 30px 20px 20px 20px;
+      padding: 30px 20px;
       text-align: center;
       z-index: 20;
       transition: transform 0.4s ease;
@@ -137,17 +139,44 @@
     .close-btn {
       position: absolute;
       top: 10px;
-      right: 15px;
-      background: transparent;
-      color: white;
-      font-size: 24px;
-      font-weight: bold;
-      border: none;
+      right: 20px;
+      font-size: 20px;
       cursor: pointer;
+      color: #FF1493;
+      font-weight: bold;
     }
 
     .close-btn:hover {
-      color: #FF1493;
+      color: #ff69b4;
+    }
+
+    @media(max-width: 768px) {
+      nav ul {
+        gap: 10px;
+      }
+
+      nav ul li a {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+
+      .profile-pic {
+        width: 100px;
+        height: 100px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      p {
+        font-size: 1em;
+      }
+
+      .popup {
+        width: 90%;
+        max-width: 95%;
+      }
     }
   </style>
 </head>
@@ -178,7 +207,7 @@
 
   <!-- Skills Popup -->
   <div id="skillsPopup" class="popup">
-    <button class="close-btn" onclick="closePopup('skillsPopup')">❌</button>
+    <div class="close-btn" onclick="closePopup('skillsPopup')">✖</div>
     <h2>🛠 My Skills</h2>
     <p>⚡ HTML, CSS, JavaScript<br>
        ⚙️ ESP32 & IoT Projects<br>
@@ -188,7 +217,7 @@
 
   <!-- Projects Popup -->
   <div id="projectsPopup" class="popup">
-    <button class="close-btn" onclick="closePopup('projectsPopup')">❌</button>
+    <div class="close-btn" onclick="closePopup('projectsPopup')">✖</div>
     <h2>💼 My Projects</h2>
     <p>🔋 Smart Home Energy Monitoring System<br>
        🌦️ IoT-based Weather Monitor<br>
@@ -197,7 +226,7 @@
 
   <!-- Certificates Popup -->
   <div id="certificatesPopup" class="popup">
-    <button class="close-btn" onclick="closePopup('certificatesPopup')">❌</button>
+    <div class="close-btn" onclick="closePopup('certificatesPopup')">✖</div>
     <h2>📜 Certificates</h2>
     <p>🎖️ IoT Project Certification<br>
        🎖️ Web Development Training<br>
@@ -206,7 +235,7 @@
 
   <!-- Contact Popup -->
   <div id="contactPopup" class="popup">
-    <button class="close-btn" onclick="closePopup('contactPopup')">❌</button>
+    <div class="close-btn" onclick="closePopup('contactPopup')">✖</div>
     <h2>📧 Contact Me</h2>
     <a href="mailto:selvakumaran134@gmail.com" class="social-btn" target="_blank">📧 Gmail</a>
     <a href="https://www.facebook.com/share/1BtVZYgnYD/" class="social-btn" target="_blank">📘 Facebook</a>
@@ -217,16 +246,17 @@
   <!-- Script -->
   <script>
     function openPopup(id) {
-      // Close all open popups
-      const popups = document.querySelectorAll('.popup');
-      popups.forEach(popup => popup.classList.remove('show'));
-
-      // Open the selected popup
+      closeAllPopups();
       document.getElementById(id).classList.add('show');
     }
 
     function closePopup(id) {
       document.getElementById(id).classList.remove('show');
+    }
+
+    function closeAllPopups() {
+      const popups = document.querySelectorAll('.popup');
+      popups.forEach(popup => popup.classList.remove('show'));
     }
   </script>
 
